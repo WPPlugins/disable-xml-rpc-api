@@ -3,8 +3,8 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://kafeweb.com/
 Description: Simple plugin to disable XML-RPC API and X-Pingback in WordPress 3.5+ for faster and more secure website.
-Version: 1.0.0
-Tested up to: 5.5.3
+Version: 1.0.1
+Tested up to: 5.6
 Requires at least: 	3.5
 Author: Amin Nazemi
 Author URI: https://kafeweb.com/
