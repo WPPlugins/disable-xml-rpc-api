@@ -1,14 +1,15 @@
 === Disable XML-RPC-API ===
 
 Plugin Name: Disable XML-RPC-API
-Plugin URI: https://kafeweb.com/
+Plugin URI: https://neatma.com
+Contributors: aminnz
 Description: Simple plugin to disable XML-RPC API and X-Pingback in WordPress 3.5+ for faster and more secure website.
 Tags: disable xml-rpc, disable xmlrpc,remove xmlrpc, XML-RPC, xmlrpc.php, XML-RPC API, stop brute force attacks
-Version: 1.0.1
+Version: 1.0.6
 Tested up to: 5.6
 Requires at least: 3.5
 Author: Amin Nazemi
-Author URI: https://kafeweb.com/
+Author URI: https://neatma.com
 License: GPLv2
 
 Simple plugin to disable XML-RPC API and X-Pingback in WordPress 3.5+ for faster and more secure website
@@ -59,3 +60,10 @@ screenshot-1.png
 
 = 1.0.1 =
 * Fix bugs
+
+= 1.0.5 =
+* Fix pingback link tag in header
+* Add ability to fix htaccess 
+
+= 1.0.6 =
+* Fix warnings for htaccess permission
