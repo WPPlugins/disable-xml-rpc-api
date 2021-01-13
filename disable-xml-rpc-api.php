@@ -3,7 +3,7 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/
 Description: Simple plugin to disable XML-RPC API and X-Pingback in WordPress 3.5+ for faster and more secure website.
-Version: 1.0.6
+Version: 1.0.7
 Tested up to: 5.6
 Requires at least: 3.5
 Author: Amin Nazemi
@@ -17,8 +17,6 @@ require_once(dsxmlrpc_plugin_url . '/lib/admin-notices/persist-admin-notices-dis
 require_once(dsxmlrpc_plugin_url . 'admin/admin.php');
 
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
-
-
 add_filter('xmlrpc_enabled', '__return_false');
 
 
@@ -26,17 +24,16 @@ add_filter('xmlrpc_enabled', '__return_false');
 
 add_filter( 'wp_headers', 'dsxmlrpc_x_pingback' );
 add_filter('pings_open', '__return_false', PHP_INT_MAX);
-add_action('wp_head','dsxmlrpc_wp_head_buffer');
+add_action('wp_head','dsxmlrpc_wp_head_buffer', PHP_INT_MAX);
 
 function dsxmlrpc_x_pingback( $headers ) {
   unset( $headers['X-Pingback'] );
          return $headers;
 }
 function dsxmlrpc_wp_head_buffer() {
-    $in = ob_get_clean();
-$in = preg_replace('#<link rel="pingback"(.*?)>#', '', $in);
-
-    echo $in; 
+	$in = ob_get_contents();
+	$out = preg_replace('#<link rel="pingback"(.*?)>#', '', $in);
+    echo $out; 
 }
 
 

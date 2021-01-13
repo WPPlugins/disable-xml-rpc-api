@@ -21,6 +21,7 @@ Pretty simply, this plugin disables the XML-RPC API on a WordPress site running 
 
 * Disable access to xmlrpc.php file using .httacess file 
 * Disable X-pingback API to minimize CPU usage 
+* Remove ping back ping link from header
 * Remove and disable xmlrpc API entirely 
 
 
@@ -67,3 +68,6 @@ screenshot-1.png
 
 = 1.0.6 =
 * Fix warnings for htaccess permission
+
+= 1.0.7 =
+* Fix blank page when using W3 Total Cache and some other cache plugins
