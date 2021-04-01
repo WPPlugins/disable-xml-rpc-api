@@ -4,9 +4,9 @@ Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com
 Contributors: aminnz,neatmarketing
 Description: Simple plugin to disable XML-RPC API and X-Pingback for faster and more secure website.
-Tags: disable xml-rpc, disable xmlrpc,remove xmlrpc, XML-RPC, xmlrpc.php, XML-RPC API, stop brute force attacks
-Version: 1.0.8
-Tested up to: 5.6
+Tags: disable xml-rpc, disable xmlrpc,remove xmlrpc, XML-RPC, pingback, stop brute force attacks
+Version: 1.0.9
+Tested up to: 5.7
 Requires at least: 3.5
 Author: Neatmarketing
 Author URI: https://neatma.com
@@ -88,3 +88,7 @@ screenshot-1.png
 
 = 1.0.8 =
 * Fix code conflict with Autoptimize plugin
+
+= 1.0.9 =
+* Wordpress 5.7 compatible
+* Fix some issues

@@ -1,18 +1,65 @@
 <?php
 
 
-function sample_admin_notice__success() {
-	if ( ! PAnD::is_admin_notice_active( 'dsxmlrpc-notice-15' ) ) {
+function dsxmlrpc_admin_notice__review() {
+	if (isset($_POST['dsxmlrpc-notice-forever'])){
+		update_option('dsxmlrpc-notice-forever','forever',false);
+	}
+	if (   ! PAnD::is_admin_notice_active( 'dsxmlrpc-notice-15' ) ||  get_option('dsxmlrpc-notice-forever')  ) {
 		return;
 	}
 
 	?>
-	<div data-dismissible="dsxmlrpc-notice-15" class="updated notice notice-success is-dismissible">
-	<h2>Your website is protected from XML-RPC DDOS attacks!</h2>
+	<div data-dismissible="dsxmlrpc-notice-15" id="dsxmlrpc-notice" class="updated notice notice-success is-dismissible">
+	<h2>Your website is protected from XML-RPC Brute-force and DDOS attacks!</h2>
 	<div class="dsxmlrpc-notice-innner">
+
 		<p>You can help us make this plugin better by reviewing and giving it 5 stars</p>
-		<a href="https://wordpress.org/support/plugin/disable-xml-rpc-api/reviews/#new-post" target="_blank" class="wporg-ratings" aria-label="4 out of 5 stars" data-title-template="%s out of 5 stars" data-rating="4" style="margin: 8px;text-decoration:none;color:#ffb900;"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a>
+		<div class="dsxmlrpc-rate">
+		<fieldset class="wporg-ratings rating-stars"><label for="rating_1"><input class="hidden" id="rating_1" type="radio" name="rating" value="1"><span class="dashicons dashicons-star-empty dashicons-star-filled" style="color:#ffb900 !important;" title="Poor"></span><span class="screen-reader-text">Poor</span></label><label for="rating_2"><input class="hidden" id="rating_2" type="radio" name="rating" value="2"><span class="dashicons dashicons-star-empty dashicons-star-filled" style="color:#ffb900 !important;" title="Works"></span><span class="screen-reader-text">Works</span></label><label for="rating_3"><input class="hidden" id="rating_3" type="radio" name="rating" value="3"><span class="dashicons dashicons-star-empty dashicons-star-filled" style="color:#ffb900 !important;" title="Good"></span><span class="screen-reader-text">Good</span></label><label for="rating_4"><input class="hidden" id="rating_4" type="radio" name="rating" value="4"><span class="dashicons dashicons-star-empty dashicons-star-filled" style="color:#ffb900 !important;" title="Great"></span><span class="screen-reader-text">Great</span></label><label for="rating_5"><input class="hidden" id="rating_5" type="radio" name="rating" checked="checked" value="5"><span class="dashicons dashicons-star-empty dashicons-star-filled" style="color:#ffb900 !important;" title="Fantastic!"></span><span class="screen-reader-text">Fantastic!</span></label></fieldset><input type="hidden" name="rating" id="rating" value="5">
+		</div>
+		<form action="" method="post" >
+		<input  class="button button-primary dsxmlrpc_button" type="submit" name="dsxmlrpc-notice-forever" value="Already Rated" />
+		</form>
+
 	</div>
+	
+			<script>
+
+		jQuery( document ).ready( function( $ ) {
+				var ratings = $( '.rating-stars' );
+				var selectedClass = 'dashicons-star-filled';
+
+				function dxtoggleStyles( currentInput ) {
+					var thisInput = $( currentInput );
+					var index = parseInt( thisInput.val() );
+
+					stars.removeClass( selectedClass );
+					stars.slice( 0, index ).addClass( selectedClass );
+				}
+
+				// If the ratings exist on the page
+				if ( ratings.length !== 0 ) {
+					var inputs = ratings.find( 'input[type="radio"]' );
+					var labels = ratings.find( 'label' );
+					var stars = inputs.next();
+
+					inputs.on( 'change', function( event ) {
+						dxtoggleStyles( event.target )
+					} );
+					inputs.on( 'click', function( event ) {
+						 window.open("https://wordpress.org/support/plugin/disable-xml-rpc-api/reviews/#new-post");
+					} );
+					labels.hover( function( event ) {
+						$curInput = $( event.currentTarget ).find( 'input' );
+						dxtoggleStyles( $curInput );
+					}, function () {
+						$currentSelected = ratings.find( 'input[type="radio"]:checked' );
+						dxtoggleStyles( $currentSelected )
+					} );
+				}
+			});
+		</script>
 	</div>
 	<style>
 	a.wporg-ratings span:hover {
@@ -22,8 +69,27 @@ function sample_admin_notice__success() {
 	.dsxmlrpc-notice-innner {
 	display: flex;
 	}}
+	.hidden, #accessibility {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    background: none;
+    left: -999em;
+	}
+	.dsxmlrpc-rate {
+    top: 5px;
+    padding-left: 10px;
+    position: relative;
+	}
+	.dsxmlrpc_button {
+    margin: 3px 0 15px 15px !important;
+    transition: 500ms;
+	}
 	</style>
 	<?php
 }
 
-add_action( 'admin_notices', 'sample_admin_notice__success' );
+add_action( 'admin_notices', 'dsxmlrpc_admin_notice__review' );
