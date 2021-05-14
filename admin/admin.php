@@ -7,7 +7,7 @@ if(!function_exists('add_action')){
 function dsxmlrpc_action_links($links) {
     $plugin_shortcuts = array(
         '<a style="color:green;" rel="noopener" href="https://wordpress.org/support/plugin/disable-xml-rpc-api/reviews/#new-post" target="_blank">' . __('Rate Plugin', 'dsxmlrpc') . '</a>',
-        '<a style="color:#f44336;" rel="noopener" href="https://bit.ly/324BrbO/" target="_blank">' . __('More Protection', 'dsxmlrpc') . '</a>',
+        '<a style="color:#f44336;" rel="noopener" href="https://neatma.com/wpsg-plugin/" target="_blank">' . __('More Protection', 'dsxmlrpc') . '</a>',
 
     );
     return array_merge($links, $plugin_shortcuts);
@@ -44,7 +44,10 @@ function dsxmlrpc_admin_notice_wpsg() {
 }
 
 function dsxmlrpc_admin_notice_review() {
-
+		 global $current_screen;
+    if ( $current_screen->id !== 'toplevel_page_Security Settings') {
+		return;
+	}
 	
 	if (isset($_POST['dsxmlrpc-notice-forever'])){
 		update_option('dsxmlrpc-notice-forever','forever',false);

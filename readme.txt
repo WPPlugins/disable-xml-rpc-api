@@ -5,11 +5,12 @@ Plugin URI: https://neatma.com
 Contributors: aminnz,neatmarketing
 Description: Simple plugin to disable XML-RPC API and X-Pingback for faster and more secure website.
 Tags: disable xml-rpc, disable xmlrpc,remove xmlrpc, XML-RPC, pingback, stop brute force attacks
-Version: 2.0.0
+Version: 2.1.0
 Tested up to: 5.7
 Requires at least: 3.5
-Author: Neatmarketing
+Author: Neatma
 Author URI: https://neatma.com
+Donate link: http://neatma.com/wpsg-plugin
 License: GPLv2
 
 A simple and lightweight plugin to disable XML-RPC API, X-Pingback and pingback-ping in WordPress 3.5+ for a faster and more secure website
@@ -19,12 +20,42 @@ A simple and lightweight plugin to disable XML-RPC API, X-Pingback and pingback-
 Protect your website from xmlrpc brute-force attacks,DOS and DDOS attacks, this plugin disables the XML-RPC and trackbacks-pingbacks on your WordPress website.
 
 **PLUGIN FEATURES**
+(These are options you can enable or disable each one)
 
 * Disable access to xmlrpc.php file using .httacess file 
+* Automatically change htaccess file permission to read-only (0444)
 * Disable X-pingback to minimize CPU usage 
+* Disable selected methods from XML-RPC
 * Remove pingback-ping link from header
 * Disable trackbacks and pingbacks to avoid spammers and hackers
-* Disable xmlrpc API entirely 
+* Rename XML-RPC slug to whatever you want
+* Black list IPs for XML-RPC
+* White list IPs for XML-RPC
+* Some options to speed-up your wordpress website
+* Disable JSON REST API
+* Hide WordPress Version
+* Disable built-in WordPress file editor
+* Disable wlw manifest
+* And some other options
+
+
+**Need more protection for your website?**
+
+Use WP Security Guard to protect your website againts hackers, spammers and bad bots.
+
+**WP Security Guard Main Features**
+
+* Anti BruteForce Attack
+* Anti Hack Firewall
+* Security Monitoring
+* Math Captcha & Google reCaptcha 
+* Two Factor Authentication
+* File Integrity Monitoring
+* No Captcha Anti Spam
+* And More...
+
+**[Learn more about WP Security Guard](https://neatma.com/wpsg-plugin/)**
+
 
 **What is XMLRPC**
 
@@ -53,7 +84,7 @@ To re-enable XML-RPC, just deactivate the plugin through the 'Plugins' menu.
 
 = Is there an admin interface for this plugin? =
 
-No. This plugin is as simple as XML-RPC is off (plugin activated) or XML-RPC is on (plugin is deactivated).
+Yes, You can find the "XML-RPC Security" in your admin menu.
 
 = How do I know if the plugin is working? =
 
@@ -68,6 +99,7 @@ If the plugin is activated, but XML-RPC appears to still be working ... OR ... t
 
 == Screenshots ==
 screenshot-1.png
+screenshot-2.jpg
 == Changelog ==
 
 = 1.0.0 =
@@ -96,3 +128,9 @@ screenshot-1.png
 = 2.0.0 =
 * Fix code conflict with some other plugin
 * Fix hiding data in WooCommerce Product Tabs
+
+= 2.1.0 =
+*Major Update
+*Add "XML-RPC Security"settings menu
+*Add some new features
+*Fix plugin deactivation bug
