@@ -6,7 +6,7 @@ Contributors: aminnz,neatmarketing
 Description: Simple plugin to disable XML-RPC API and X-Pingback for faster and more secure website.
 Tags: disable xml-rpc, disable xmlrpc,remove xmlrpc, XML-RPC, pingback, stop brute force attacks
 Version: 2.1.0
-Tested up to: 5.7
+Tested up to: 5.8
 Requires at least: 3.5
 Author: Neatma
 Author URI: https://neatma.com
@@ -134,3 +134,7 @@ screenshot-2.jpg
 *Add "XML-RPC Security"settings menu
 *Add some new features
 *Fix plugin deactivation bug
+
+= 2.1.1 =
+* Add new feature fix hotlinks
+* Change notif timing

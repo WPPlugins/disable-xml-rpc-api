@@ -3,8 +3,8 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/dsxmlrpc-plugin/
 Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
-Version: 2.1.0
-Tested up to: 5.7
+Version: 2.1.1
+Tested up to: 5.8
 Requires at least: 3.5
 Author: Neatma
 Author URI: https://neatma.com/
@@ -339,6 +339,10 @@ function dsxmlrpc_cur_page(){
 			add_filter( 'script_loader_src', 'dsxmlrpc_remove_ver_param'  );
 			add_filter( 'style_loader_src', 'dsxmlrpc_remove_ver_param'  );
 		}
+			/* Fix Hotlink in images. */ 
+		if ( dsxmlrpc_get_option('hotlink-fix') ) {
+			add_action('admin_init', 'dsxmlrpc_hotlinkfix' );
+		}
 	/**
 	 * Remove the WordPress version info url parameter.
 	 */
@@ -357,3 +361,22 @@ function dsxmlrpc_cur_page(){
 	 function dsxmlrpc_disable_oembed() { 
 		wp_dequeue_script( 'wp-embed' ); 
 	}
+	
+		
+		
+	function dsxmlrpc_hotlinkfix() {
+		
+$home_url =  get_home_url();
+
+$htaccess_code = '
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^'. $home_url .' [NC]
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L] ';
+
+		dsxmlrpc_file_chmod();
+		insert_with_markers(DSXMLRPC_HOME_PATH . '.htaccess' , 'DS-XML-RPC-FIX-HOTLINK', $htaccess_code);
+		dsxmlrpc_file_protect();
+		
+} 

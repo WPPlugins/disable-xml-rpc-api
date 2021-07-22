@@ -14,12 +14,12 @@ function dsxmlrpc_action_links($links) {
 }
 
 function dsxmlrpc_admin_notice_wpsg() {
-	if (   ! PAnD::is_admin_notice_active( 'dsxmlrpc-wpsg-notice-10' )  ) {
+	if (   ! PAnD::is_admin_notice_active( 'dsxmlrpc-wpsg-notice-forever' )  ) {
 		return;
 	}
 	
 	?>
-	<div data-dismissible="dsxmlrpc-wpsg-notice-10" id="dsxmlrpc-wpsg-notice" class="notice notice-warning is-dismissible">
+	<div data-dismissible="dsxmlrpc-wpsg-notice-forever" id="dsxmlrpc-wpsg-notice" class="notice notice-warning is-dismissible">
 	<img src="<?=DSXMLRPC_URL?>/admin/logo-icon.png" style="float:left; margin:10px 20px 10px 10px" width="100">
 	<h2>You can improve your website security by using WP Security Guard!</h2>
 	<div class="dsxmlrpc-wpsg-notice-innner">

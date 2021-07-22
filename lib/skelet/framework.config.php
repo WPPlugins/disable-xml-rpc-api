@@ -273,12 +273,18 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
     'icon'  => 'fas fa-tachometer-alt',
     'title'  => 'Speed Up WordPress',
     'fields' => array(
-		/* Enable comments antispam */
 			  array(
 	  'id'      => 'slow-heartbeat',
 	  'type'    => 'switcher',
 	  'title'   => 'Heartbeat Slowdown',
 	  'desc'    => 'Heartbeat can use a lot of resources and slow down you website',
+	  'default' => true,
+	),			  array(
+	  'id'      => 'hotlink-fix',
+	  'type'    => 'switcher',
+	  'title'   => 'Hotlink Fix',
+	  'desc'    => 'Disable Hotlinking and Leaching of Your Content',
+	  'help'    => 'disable hotlinking of images with forbidden or custom image option',
 	  'default' => true,
 	),
 	array(
