@@ -234,7 +234,14 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'id'      => 'json-rest-api',
 	  'type'    => 'switcher',
 	  'title'   => 'Disable JSON REST API',
-	  'desc'    => 'disable the JSON REST API for logged out users',
+	  'desc'    => 'disable the JSON REST API for not logged in users',
+	  'default' => false,
+	),
+	array(
+	  'id'      => 'htaccess protection',
+	  'type'    => 'switcher',
+	  'title'   => 'Disable writing in htaccess file',
+	  'desc'    => 'Protect your website by changing htaccess file permission to read-only (0444)',
 	  'default' => false,
 	),
 	array(
