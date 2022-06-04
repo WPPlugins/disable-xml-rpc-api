@@ -3,8 +3,8 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/dsxmlrpc-plugin/
 Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
-Version: 2.1.2
-Tested up to: 5.9
+Version: 2.1.3
+Tested up to: 6.0
 Requires at least: 3.5
 Author: Neatma
 Author URI: https://neatma.com/
@@ -112,26 +112,28 @@ Allow from 192.0.102.95/32';
 
 
 	if (!dsxmlrpc_get_option('dsxmlrpc-switcher') ) {
-
-		 $dsxmlrpc_allowed_ips = dsxmlrpc_fix_ip('White-list-IPs') . $jp_allowed_ips;
+	     
+		 $allowed_ips = dsxmlrpc_fix_ip('White-list-IPs') . $jp_allowed_ips;
 $htaccess_code =
 '<Files xmlrpc.php>
 order deny,allow
 deny from all
-'.$dsxmlrpc_allowed_ips.'
+'.$allowed_ips.'
 </Files>
 ';
 	} else {
 
-	$dsxmlrpc_disallowed_ips =  dsxmlrpc_fix_ip('Black-list-IPs');
+	$disallowed_ips =  dsxmlrpc_fix_ip('Black-list-IPs');
 $htaccess_code =
 '<Files xmlrpc.php>
 order allow,deny
 allow from all
-'.$dsxmlrpc_disallowed_ips.'
+'.$disallowed_ips.'
 </Files>
 ';
 	}
+		add_filter('xmlrpc_enabled', '__return_false');
+		
 		dsxmlrpc_file_chmod();
 		insert_with_markers(DSXMLRPC_HOME_PATH . '.htaccess' , 'DS-XML-RPC-API', $htaccess_code);
 		dsxmlrpc_get_option('htaccess protection') ? dsxmlrpc_file_protect() : '' ;
@@ -140,9 +142,21 @@ allow from all
 } add_action('admin_head', 'dsxmlrpc_add_htaccess' );
 
 
-
 //
-//Remove .htaccess codes when disabled
+//  Remove with markers from files (.htaccess)
+function dsxmlrpc_remove_with_markers($marker, $filename){ 
+	if (file_exists($filename)) {
+		$myfile = file_get_contents($filename);
+		$pattern = "/#.BEGIN $marker(?<=# BEGIN $marker).*(?=# END $marker)#.END $marker/sui";
+
+		$result = preg_replace($pattern, '', $myfile);
+		$result = preg_replace('/\s+$/sui', '', $result);
+		file_put_contents($filename, $result);
+	}
+}
+		
+//
+//  Remove .htaccess codes when disabled
 function dsxmlrpc_remove_htaccess($plugin) {
 	if ($plugin !== 'disable-xml-rpc-api/disable-xml-rpc-api.php')	{
 		return;
@@ -151,16 +165,21 @@ function dsxmlrpc_remove_htaccess($plugin) {
     $htaccess_file = DSXMLRPC_HOME_PATH . '.htaccess';
 	if(!is_writable ($htaccess_file) ) {
 		dsxmlrpc_file_chmod();
-	    insert_with_markers($htaccess_file, 'DS-XML-RPC-API', '');
+		dsxmlrpc_remove_with_markers('DS-XML-RPC-API', $htaccess_file);
+		dsxmlrpc_remove_with_markers('DS-XML-RPC-FIX-HOTLINK', $htaccess_file);
 		dsxmlrpc_get_option('htaccess protection') ? dsxmlrpc_file_protect() : '' ;
 	} else {
-	    insert_with_markers($htaccess_file, 'DS-XML-RPC-API', '');
+
+		dsxmlrpc_remove_with_markers('DS-XML-RPC-API', $htaccess_file);
+		dsxmlrpc_remove_with_markers('DS-XML-RPC-FIX-HOTLINK', $htaccess_file);
 		dsxmlrpc_get_option('htaccess protection') ? dsxmlrpc_file_protect() : '' ;
 	}
 		delete_option( 'pand-' . md5('wpsg-notice') );
 		delete_option( 'pand-' . md5('dsxmlrpc-notice') );
 }
 add_action( 'deactivated_plugin' , 'dsxmlrpc_remove_htaccess', 10, 2);
+
+
 
 //
 //  Unistallation actions
@@ -360,8 +379,12 @@ function dsxmlrpc_cur_page(){
 		/* Remove the WordPress version info url parameter. */
 		if ( dsxmlrpc_get_option('remove-wp-ver') ) {
 			remove_action( 'wp_head', 'wp_generator' );
-			add_filter( 'script_loader_src', 'dsxmlrpc_remove_ver_param'  );
-			add_filter( 'style_loader_src', 'dsxmlrpc_remove_ver_param'  );
+			
+			if (!is_admin()) { 
+				add_filter( 'script_loader_src', 'dsxmlrpc_remove_ver_param'  );
+				add_filter( 'style_loader_src', 'dsxmlrpc_remove_ver_param'  );
+			}
+
 		}
 		
 
