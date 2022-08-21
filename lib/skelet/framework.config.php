@@ -28,12 +28,13 @@ if( class_exists( 'SKELET' ) ) {
     'menu_type'        => 'menu',
     'menu_icon'        => 'dashicons-shield-alt',
     'theme'            => 'dark',
+    'nav'              => 'normal',
     'menu_capability'  => 'edit_users',
     'show_reset_section'  => false,
     'show_search'      => true,
     'show_bar_menu'  => false,
     'ajax_save'  => false,
-	'footer_text'=> '<span style="color:gainsboro;">Please <a target="_blank" href="https://wordpress.org/support/plugin/disable-xml-rpc-api/reviews/#new-post">rate us</a> in wordprees repository</span><script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a0979335-6589-492d-8623-bc4622d40ba0";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>',
+	'footer_text'=> '<span style="color:gainsboro;">Please <a target="_blank" href="https://wordpress.org/support/plugin/disable-xml-rpc-api/reviews/#new-post">rate us</a> in wordprees repository</span>',
 
 	
 	
@@ -102,14 +103,14 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'help'    => 'Leave empty if you dont want to change it',
 	  'desc'    => 'If you dont want to disable XML-RPC entirely you can change the xmlrpc.php slug to whatever you want to prevent automated attacks',
 	  'dependency' => array( 'dsxmlrpc-switcher', '==', 'true' ),
-	  'placeholder' => 'mobile-api'
+	  'placeholder' => 'Example: mobile-api'
 	),
 			  array(
 	  'id'      => 'jetpack-switcher',
 	  'type'    => 'switcher',
 	  'title'   => 'Enable xml-rpc for Jetpack',
 	  'label'   => 'This switch will add Jetpack servers IP range to the whitelist',
-	  'default' => true,
+	  'default' => false,
 	  'dependency' => array( 'dsxmlrpc-switcher', '==', 'false' ),
 	  
 	),
@@ -249,7 +250,7 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'type'    => 'switcher',
 	  'title'   => 'Hide WordPress Version',
 	  'desc'    => 'Remove WordPress version for security reasons',
-	  'default' => false,
+	  'default' => true,
 	),
 	array(
 	  'id'      => 'disable-code-editor',
@@ -290,9 +291,9 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'id'      => 'hotlink-fix',
 	  'type'    => 'switcher',
 	  'title'   => 'Hotlink Fix',
-	  'desc'    => 'Disable Hotlinking and Leaching of Your Content',
-	  'help'    => 'disable hotlinking of images with forbidden or custom image option',
-	  'default' => true,
+	  'desc'    => 'Disable Hotlinking and Leaching of Your Content (On means it will prevent hotlinking)',
+	  'help'    => 'disable hotlinking of images with forbidden',
+	  'default' => false,
 	),
 	array(
 	  'id'      => 'remove-emojis',
