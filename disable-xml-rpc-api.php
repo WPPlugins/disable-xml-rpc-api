@@ -1,10 +1,35 @@
 <?php
+/*
+Plugin Name: Disable XML-RPC-API
+Plugin URI: https://neatma.com/dsxmlrpc-plugin/
+Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
+Version: 2.1.4.1
+Tested up to: 6.0
+Requires at least: 3.5
+Author: Neatma
+Author URI: https://neatma.com/
+License: GPLv2
+*/
 
 namespace dsxmlrpc;
 
 if (!defined('ABSPATH')) {
     exit;
 }
+
+
+// Constants
+define('DSXMLRPC_FILE', __FILE__);
+define('DSXMLRPC_PLUGIN_FILE', plugin_dir_path(__FILE__));
+define('DSXMLRPC_URL', plugin_dir_url(__FILE__));
+define('DSXMLRPC_HOME_PATH', function_exists('get_home_path') ? get_home_path() : ABSPATH);
+
+require_once(DSXMLRPC_PLUGIN_FILE . '/admin/admin.php');
+require_once(DSXMLRPC_PLUGIN_FILE . '/lib/skelet/framework.config.php');
+if (!class_exists('PAnD')) {
+    require_once(DSXMLRPC_PLUGIN_FILE . '/lib/admin-notices/persist-admin-notices-dismissal.php');
+}
+
 
 /**
  * Class xmlrpcSecurity
@@ -33,6 +58,8 @@ class xmlrpcSecurity
         add_action('admin_head', [$this, 'add_htaccess']);
         add_action('upgrader_process_complete', [$this, 'after_update'], 10, 2);
         add_action('init', [$this, 'speedUpWordpress']);
+
+        add_action( 'admin_enqueue_scripts', [$this, 'load_plugin_scripts']);
 
         add_action('skelet_options_inside', [$this, 'optionsSidebar']);
 
@@ -504,4 +531,16 @@ allow from all
         return $data;
     }
 
+
+    /**
+     *  Enqueue plugin scripts.
+     */
+    function load_plugin_scripts() {
+        wp_enqueue_script( 'dsxmlrpc_admin', DSXMLRPC_URL . '/admin/admin.js', array('jquery'), '1.0.1' );
+    }
+
 }
+
+
+// Initialize the main class
+xmlrpcSecurity::initialize();
