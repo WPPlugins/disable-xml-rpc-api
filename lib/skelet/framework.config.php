@@ -250,14 +250,14 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'type'    => 'switcher',
 	  'title'   => 'Hide WordPress Version',
 	  'desc'    => 'Remove WordPress version for security reasons',
-	  'default' => true,
+	  'default' => false,
 	),
 	array(
 	  'id'      => 'disable-code-editor',
 	  'type'    => 'switcher',
 	  'title'   => 'Disable built-in WordPress file editor',
 	  'desc'    => 'Disable WordPress file editor for security reasons',
-	  'default' => true,
+	  'default' => false,
 	  'help'    => 'If you want to edit your themes and plugins codes you need to switch off this option!'
 	),
 	array(
