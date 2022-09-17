@@ -3,7 +3,7 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/dsxmlrpc-plugin/
 Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
-Version: 2.1.4.3
+Version: 2.1.4.4
 Tested up to: 6.0
 Requires at least: 3.5
 Author: Neatma
@@ -61,7 +61,7 @@ class xmlrpcSecurity
 
         add_action( 'admin_enqueue_scripts', [$this, 'load_plugin_scripts']);
 
-        add_action('skelet_options_inside', [$this, 'optionsSidebar']);
+        //add_action('skelet_options_inside', [$this, 'optionsSidebar']);
 
         if (isset($disabled_methods) && is_array($disabled_methods)) {
             add_action('init', [$this, 'removeSelectedMethods']);
@@ -187,7 +187,8 @@ class xmlrpcSecurity
     {
         global $current_screen;
         if ($current_screen->id == 'toplevel_page_Security Settings' || $current_screen->id == 'plugins') {
-
+			$htaccess_code = '';
+			
             if ($this->get_option('hotlink-fix')) {
                 $home_url      = get_home_url();
                 $htaccess_code = '
@@ -238,6 +239,7 @@ allow from all
 </Files>
 ';
             }
+			
             $this->file_chmod();
             insert_with_markers(DSXMLRPC_HOME_PATH . '.htaccess', 'DS-XML-RPC-API', $htaccess_code);
             $this->get_option('htaccess protection') ? $this->file_protect() : '';
@@ -298,7 +300,8 @@ allow from all
     public function after_update($upgrader_object, $options)
     {
         $current_plugin_path_name = plugin_basename(DSXMLRPC_FILE);
-
+		if(!is_array($options)) return;
+		
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
             foreach ($options['plugins'] as $each_plugin) {
                 if ($each_plugin == $current_plugin_path_name) {
