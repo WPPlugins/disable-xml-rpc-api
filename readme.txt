@@ -172,3 +172,9 @@ screenshot-2.jpg
 
 = 2.1.4.8 =
 * Fix bug with disable wp reset API option 
+
+= 2.1.4.9 =
+* Update Jetpack default whitelist IPs
+* Fix bug with update actions function
+* Keep enabling WP RSS in default settings
+* Test with WordPress 6.3 and update tested up to

@@ -308,7 +308,7 @@ Back in 2013, attackers sent Pingback requests through xmlrpc.php of approximate
 	  'type'    => 'switcher',
 	  'title'   => 'Remove RSS and RSD',
 	  'desc'    => 'RSS is outdated technology and should be removed',
-	  'default' => true,
+	  'default' => false,
 	  
 	),
 	array(

@@ -3,7 +3,7 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/dsxmlrpc-plugin/
 Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
-Version: 2.1.4.8
+Version: 2.1.4.9
 Tested up to: 6.3
 Requires at least: 4.8
 Author: Neatma
@@ -51,15 +51,12 @@ class xmlrpcSecurity
         register_deactivation_hook(DSXMLRPC_FILE, [$this, 'pluginDeactivated']);
 
 
-        add_action('admin_init', ['PAnD', 'init']);
+        //add_action('admin_init', ['PAnD', 'init']);
         add_filter('wp_xmlrpc_server_class', [$this, 'disable_wp_xmlrpc']);
         add_action('admin_head', [$this, 'add_htaccess']);
-        add_action('upgrader_process_complete', [$this, 'after_update'], 10, 2);
         add_action('init', [$this, 'speedUpWordpress']);
 
         add_action( 'admin_enqueue_scripts', [$this, 'load_plugin_scripts']);
-
-        //add_action('skelet_options_inside', [$this, 'optionsSidebar']);
 
         if (isset($disabled_methods) && is_array($disabled_methods)) {
             add_action('init', [$this, 'removeSelectedMethods']);
@@ -108,23 +105,6 @@ class xmlrpcSecurity
     static function initialize()
     {
         return new static();
-    }
-
-    function optionsSidebar()
-    {
-        $html = '<style>.skelet.skelet-options.skelet-theme-dark {
-    display: flex;
-    flex-direction: row-reverse;
-}.wp-expert h2,.wp-expert p {
-    color: #185283;
-    text-align: center;
-}
-.skelet-container {
-    width: 80%;
-}</style>';
-        $html .= '<div class="wp-expert"><img alt="" src="' . DSXMLRPC_URL . '/admin/hire-expert.png"  class="avatar avatar-26 photo" height="490" width="395" loading="lazy">
-<a href="https://wa.me/15302173760?text=" target="_blank"><H2>Hire an WordPress expert for your site</H2><p>Click for a free consult on WhatsApp</p></a></div>';
-        echo $html;
     }
 
     /**
@@ -202,17 +182,13 @@ RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]
 
             if ($this->get_option('jetpack-switcher')) {
                 $jp_allowed_ips = '
-Allow from 122.248.245.244/32
-Allow from 54.217.201.243/32
-Allow from 54.232.116.4/32
-Allow from 192.0.80.0/20
-Allow from 192.0.96.0/20
-Allow from 192.0.112.0/20
-Allow from 195.234.108.0/22
-Allow from 192.0.96.202/32
-Allow from 192.0.98.138/32
-Allow from 192.0.102.71/32
-Allow from 192.0.102.95/32';
+122.248.245.244/32
+54.217.201.243/32
+54.232.116.4/32
+192.0.80.0/20
+192.0.96.0/20
+192.0.112.0/20
+195.234.108.0/22';
             } else {
                 $jp_allowed_ips = '';
             }
@@ -280,25 +256,6 @@ allow from all
     }
 
 
-    /**
-     * @param $upgrader_object
-     * @param $options
-     * Update actions
-     */
-    public function after_update($upgrader_object, $options)
-    {
-        $current_plugin_path_name = plugin_basename(DSXMLRPC_FILE);
-		if(!is_array($options)) return;
-		
-        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            foreach ($options['plugins'] as $each_plugin) {
-                if ($each_plugin == $current_plugin_path_name) {
-                    delete_option('pand-' . md5('wpsg-notice'));
-                    delete_option('pand-' . md5('dsxmlrpc-notice'));
-                }
-            }
-        }
-    }
 
     /**
      * @param $xmlrpc
