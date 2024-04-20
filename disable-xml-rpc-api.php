@@ -3,9 +3,9 @@
 Plugin Name: Disable XML-RPC-API
 Plugin URI: https://neatma.com/dsxmlrpc-plugin/
 Description: Lightweight plugin to disable XML-RPC API and Pingbacks,Trackbacks for faster and more secure website.
-Version: 2.1.4.9
-Tested up to: 6.3
-Requires at least: 4.8
+Version: 2.1.5
+Tested up to: 6.5
+Requires at least: 5.0
 Author: Neatma
 Author URI: https://neatma.com/
 License: GPLv2
@@ -182,13 +182,13 @@ RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]
 
             if ($this->get_option('jetpack-switcher')) {
                 $jp_allowed_ips = '
-122.248.245.244/32
-54.217.201.243/32
-54.232.116.4/32
-192.0.80.0/20
-192.0.96.0/20
-192.0.112.0/20
-195.234.108.0/22';
+Allow from 122.248.245.244/32
+Allow from 54.217.201.243/32
+Allow from 54.232.116.4/32
+Allow from 192.0.80.0/20
+Allow from 192.0.96.0/20
+Allow from 192.0.112.0/20
+Allow from 195.234.108.0/22';
             } else {
                 $jp_allowed_ips = '';
             }

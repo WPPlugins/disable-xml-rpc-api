@@ -5,8 +5,8 @@ Plugin URI: https://neatma.com
 Contributors: aminnz,neatmarketing
 Description: Simple plugin to disable XML-RPC API and X-Pingback for faster and more secure website.
 Tags: disable xml-rpc, xmlrpc, disable xmlrpc,remove xmlrpc, XML-RPC, pingback, stop brute force attacks
-Tested up to: 6.3
-Requires at least: 4.8
+Tested up to: 6.5
+Requires at least: 5.0
 Author: Neatma
 Author URI: https://neatma.com
 Donate link: http://neatma.com/wpsg-plugin
@@ -37,23 +37,6 @@ Protect your website from xmlrpc brute-force attacks,DOS and DDOS attacks, this 
 * Disable wlw manifest
 * And some other options
 
-
-**Need more protection for your website?**
-
-Use WP Security Guard to protect your website againts hackers, spammers and bad bots.
-
-**WP Security Guard Main Features**
-
-* Anti BruteForce Attack
-* Anti Hack Firewall
-* Security Monitoring
-* Math Captcha & Google reCaptcha 
-* Two Factor Authentication
-* File Integrity Monitoring
-* No Captcha Anti Spam
-* And More...
-
-**[Learn more about WP Security Guard](https://neatma.com/wpsg-plugin/)**
 
 
 **What is XMLRPC**
@@ -178,3 +161,6 @@ screenshot-2.jpg
 * Fix bug with update actions function
 * Keep enabling WP RSS in default settings
 * Test with WordPress 6.3 and update tested up to
+
+= 2.1.5 =
+* Hotfix for .htaccess error and disabling the admin notices
